@@ -11,6 +11,8 @@ namespace calc
         string action = "";
         bool op = false;
         bool calculated = false;
+        bool numentry = false;
+        bool dotentry = false;
 
         public Calculator()
         {
@@ -38,6 +40,7 @@ namespace calc
                 y = y + "1";
                 output.Text = y; output.Refresh();
             }
+            numentry = true;
         }
 
         private void number_2_Click(object sender, EventArgs e)
@@ -61,6 +64,7 @@ namespace calc
                 y = y + "2";
                 output.Text = y; output.Refresh();
             }
+            numentry = true;
         }
 
         private void number_3_Click(object sender, EventArgs e)
@@ -84,6 +88,7 @@ namespace calc
                 y = y + "3";
                 output.Text = y; output.Refresh();
             }
+            numentry = true;
         }
 
         private void number_4_Click(object sender, EventArgs e)
@@ -107,6 +112,7 @@ namespace calc
                 y = y + "4";
                 output.Text = y; output.Refresh();
             }
+            numentry = true;
         }
 
         private void number_5_Click(object sender, EventArgs e)
@@ -130,6 +136,7 @@ namespace calc
                 y = y + "5";
                 output.Text = y; output.Refresh();
             }
+            numentry = true;
         }
 
         private void number_6_Click(object sender, EventArgs e)
@@ -153,6 +160,7 @@ namespace calc
                 y = y + "6";
                 output.Text = y; output.Refresh();
             }
+            numentry = true;
         }
 
         private void number_7_Click(object sender, EventArgs e)
@@ -176,6 +184,7 @@ namespace calc
                 y = y + "7";
                 output.Text = y; output.Refresh();
             }
+            numentry = true;
         }
 
         private void number_8_Click(object sender, EventArgs e)
@@ -199,6 +208,7 @@ namespace calc
                 y = y + "8";
                 output.Text = y; output.Refresh();
             }
+            numentry = true;
         }
 
         private void number_9_Click(object sender, EventArgs e)
@@ -222,6 +232,7 @@ namespace calc
                 y = y + "9";
                 output.Text = y; output.Refresh();
             }
+            numentry = true;
         }
 
         private void number_0_Click(object sender, EventArgs e)
@@ -245,28 +256,35 @@ namespace calc
                 y = y + "0";
                 output.Text = y; output.Refresh();
             }
+            numentry = true;
         }
 
         private void point_Click(object sender, EventArgs e)
         {
-            if (op == false)
+            if (dotentry == false)
             {
-                if (calculated == true)
+                if (op == false)
                 {
-                    calculated = false;
-                    x = ".";
-                    output.Text = x; output.Refresh();
+                    if (calculated == true)
+                    {
+                        calculated = false;
+                        x = ".";
+                        output.Text = x; output.Refresh();
+                        dotentry = true;
+                    }
+                    else
+                    {
+                        x = x + ".";
+                        output.Text = x; output.Refresh();
+                        dotentry = true;
+                    }
                 }
                 else
                 {
-                    x = x + ".";
-                    output.Text = x; output.Refresh();
+                    y = y + ".";
+                    output.Text = y; output.Refresh();
+                    dotentry = true;
                 }
-            }
-            else
-            {
-                y = y + ".";
-                output.Text = y; output.Refresh();
             }
         }
 
@@ -295,451 +313,481 @@ namespace calc
 
         private void add_Click(object sender, EventArgs e)
         {
-            if (op == true)
+            if (numentry == true)
             {
-                if (action == "+")
+                if (op == true)
                 {
-                    float z = float.Parse(x) + float.Parse(y);
-                    string inp = ($"{x} + {y} = {z}");
-                    input.Text = inp; input.Refresh();
-                    v = z.ToString();
-                    x = z.ToString();
-                    y = "";
-                    output.Text = x; output.Refresh();
+                    if (action == "+")
+                    {
+                        float z = float.Parse(x) + float.Parse(y);
+                        string inp = ($"{x} + {y} = {z}");
+                        input.Text = inp; input.Refresh();
+                        v = z.ToString();
+                        x = z.ToString();
+                        y = "";
+                        output.Text = x; output.Refresh();
+                    }
+                    else if (action == "−")
+                    {
+                        float z = float.Parse(x) - float.Parse(y);
+                        string inp = ($"{x} − {y} = {z}");
+                        input.Text = inp; input.Refresh();
+                        v = z.ToString();
+                        x = z.ToString();
+                        y = "";
+                        output.Text = x; output.Refresh();
+                    }
+                    else if (action == "×")
+                    {
+                        float z = float.Parse(x) * float.Parse(y);
+                        string inp = ($"{x} × {y} = {z}");
+                        input.Text = inp; input.Refresh();
+                        v = z.ToString();
+                        x = z.ToString();
+                        y = "";
+                        output.Text = x; output.Refresh();
+                    }
+                    else if (action == "÷")
+                    {
+                        float z = float.Parse(x) / float.Parse(y);
+                        string inp = ($"{x} ÷ {y} = {z}");
+                        input.Text = inp; input.Refresh();
+                        v = z.ToString();
+                        x = z.ToString();
+                        y = "";
+                        output.Text = x; output.Refresh();
+                    }
+                    else if (action == "√Ans")
+                    {
+                        float z = (float)Math.Sqrt(float.Parse(x));
+                        string inp = ($"√Ans = {z}");
+                        input.Text = inp; input.Refresh();
+                        v = z.ToString();
+                        x = z.ToString();
+                        y = "";
+                        output.Text = x; output.Refresh();
+                    }
+                    else if (action == "Ans^2")
+                    {
+                        float z = float.Parse(x) * float.Parse(x);
+                        string inp = ($"Ans^2 = {z}");
+                        input.Text = inp; input.Refresh();
+                        v = z.ToString();
+                        x = z.ToString();
+                        y = "";
+                        output.Text = x; output.Refresh();
+                    }
+                    output.Text = "+"; output.Refresh();
+                    action = "+";
                 }
-                else if (action == "−")
+                else
                 {
-                    float z = float.Parse(x) - float.Parse(y);
-                    string inp = ($"{x} − {y} = {z}");
-                    input.Text = inp; input.Refresh();
-                    v = z.ToString();
-                    x = z.ToString();
-                    y = "";
-                    output.Text = x; output.Refresh();
+                    op = true;
+                    output.Text = "+"; output.Refresh();
+                    action = "+";
                 }
-                else if (action == "×")
-                {
-                    float z = float.Parse(x) * float.Parse(y);
-                    string inp = ($"{x} × {y} = {z}");
-                    input.Text = inp; input.Refresh();
-                    v = z.ToString();
-                    x = z.ToString();
-                    y = "";
-                    output.Text = x; output.Refresh();
-                }
-                else if (action == "÷")
-                {
-                    float z = float.Parse(x) / float.Parse(y);
-                    string inp = ($"{x} ÷ {y} = {z}");
-                    input.Text = inp; input.Refresh();
-                    v = z.ToString();
-                    x = z.ToString();
-                    y = "";
-                    output.Text = x; output.Refresh();
-                }
-                else if (action == "√Ans")
-                {
-                    float z = (float)Math.Sqrt(float.Parse(x));
-                    string inp = ($"√Ans = {z}");
-                    input.Text = inp; input.Refresh();
-                    v = z.ToString();
-                    x = z.ToString();
-                    y = "";
-                    output.Text = x; output.Refresh();
-                }
-                else if (action == "Ans^2")
-                {
-                    float z = float.Parse(x) * float.Parse(x);
-                    string inp = ($"Ans^2 = {z}");
-                    input.Text = inp; input.Refresh();
-                    v = z.ToString();
-                    x = z.ToString();
-                    y = "";
-                    output.Text = x; output.Refresh();
-                }
-                output.Text = "+"; output.Refresh();
-                action = "+";
-            }
-            else
-            {
-                op = true;
-                output.Text = "+"; output.Refresh();
-                action = "+";
+                numentry = false;
+                dotentry = false;
             }
         }
 
         private void minus_Click(object sender, EventArgs e)
         {
-            if (op == true)
+            if (numentry == true)
             {
-                if (action == "+")
+                if (op == true)
                 {
-                    float z = float.Parse(x) + float.Parse(y);
-                    string inp = ($"{x} + {y} = {z}");
-                    input.Text = inp; input.Refresh();
-                    v = z.ToString();
-                    x = z.ToString();
-                    y = "";
-                    output.Text = x; output.Refresh();
+                    if (action == "+")
+                    {
+                        float z = float.Parse(x) + float.Parse(y);
+                        string inp = ($"{x} + {y} = {z}");
+                        input.Text = inp; input.Refresh();
+                        v = z.ToString();
+                        x = z.ToString();
+                        y = "";
+                        output.Text = x; output.Refresh();
+                    }
+                    else if (action == "−")
+                    {
+                        float z = float.Parse(x) - float.Parse(y);
+                        string inp = ($"{x} − {y} = {z}");
+                        input.Text = inp; input.Refresh();
+                        v = z.ToString();
+                        x = z.ToString();
+                        y = "";
+                        output.Text = x; output.Refresh();
+                    }
+                    else if (action == "×")
+                    {
+                        float z = float.Parse(x) * float.Parse(y);
+                        string inp = ($"{x} × {y} = {z}");
+                        input.Text = inp; input.Refresh();
+                        v = z.ToString();
+                        x = z.ToString();
+                        y = "";
+                        output.Text = x; output.Refresh();
+                    }
+                    else if (action == "÷")
+                    {
+                        float z = float.Parse(x) / float.Parse(y);
+                        string inp = ($"{x} ÷ {y} = {z}");
+                        input.Text = inp; input.Refresh();
+                        v = z.ToString();
+                        x = z.ToString();
+                        y = "";
+                        output.Text = x; output.Refresh();
+                    }
+                    else if (action == "√Ans")
+                    {
+                        float z = (float)Math.Sqrt(float.Parse(x));
+                        string inp = ($"√Ans = {z}");
+                        input.Text = inp; input.Refresh();
+                        v = z.ToString();
+                        x = z.ToString();
+                        y = "";
+                        output.Text = x; output.Refresh();
+                    }
+                    else if (action == "Ans^2")
+                    {
+                        float z = float.Parse(x) * float.Parse(x);
+                        string inp = ($"Ans^2 = {z}");
+                        input.Text = inp; input.Refresh();
+                        v = z.ToString();
+                        x = z.ToString();
+                        y = "";
+                        output.Text = x; output.Refresh();
+                    }
+                    output.Text = "−"; output.Refresh();
+                    action = "−";
                 }
-                else if (action == "−")
+                else
                 {
-                    float z = float.Parse(x) - float.Parse(y);
-                    string inp = ($"{x} − {y} = {z}");
-                    input.Text = inp; input.Refresh();
-                    v = z.ToString();
-                    x = z.ToString();
-                    y = "";
-                    output.Text = x; output.Refresh();
+                    op = true;
+                    output.Text = "−"; output.Refresh();
+                    action = "−";
                 }
-                else if (action == "×")
-                {
-                    float z = float.Parse(x) * float.Parse(y);
-                    string inp = ($"{x} × {y} = {z}");
-                    input.Text = inp; input.Refresh();
-                    v = z.ToString();
-                    x = z.ToString();
-                    y = "";
-                    output.Text = x; output.Refresh();
-                }
-                else if (action == "÷")
-                {
-                    float z = float.Parse(x) / float.Parse(y);
-                    string inp = ($"{x} ÷ {y} = {z}");
-                    input.Text = inp; input.Refresh();
-                    v = z.ToString();
-                    x = z.ToString();
-                    y = "";
-                    output.Text = x; output.Refresh();
-                }
-                else if (action == "√Ans")
-                {
-                    float z = (float)Math.Sqrt(float.Parse(x));
-                    string inp = ($"√Ans = {z}");
-                    input.Text = inp; input.Refresh();
-                    v = z.ToString();
-                    x = z.ToString();
-                    y = "";
-                    output.Text = x; output.Refresh();
-                }
-                else if (action == "Ans^2")
-                {
-                    float z = float.Parse(x) * float.Parse(x);
-                    string inp = ($"Ans^2 = {z}");
-                    input.Text = inp; input.Refresh();
-                    v = z.ToString();
-                    x = z.ToString();
-                    y = "";
-                    output.Text = x; output.Refresh();
-                }
-                output.Text = "−"; output.Refresh();
-                action = "−";
-            }
-            else
-            {
-                op = true;
-                output.Text = "−"; output.Refresh();
-                action = "−";
+                numentry = false;
+                dotentry = false;
             }
         }
 
         private void multiply_Click(object sender, EventArgs e)
         {
-            if (op == true)
+            if (numentry == true)
             {
-                if (action == "+")
+                if (op == true)
                 {
-                    float z = float.Parse(x) + float.Parse(y);
-                    string inp = ($"{x} + {y} = {z}");
-                    input.Text = inp; input.Refresh();
-                    v = z.ToString();
-                    x = z.ToString();
-                    y = "";
-                    output.Text = x; output.Refresh();
+                    if (action == "+")
+                    {
+                        float z = float.Parse(x) + float.Parse(y);
+                        string inp = ($"{x} + {y} = {z}");
+                        input.Text = inp; input.Refresh();
+                        v = z.ToString();
+                        x = z.ToString();
+                        y = "";
+                        output.Text = x; output.Refresh();
+                    }
+                    else if (action == "−")
+                    {
+                        float z = float.Parse(x) - float.Parse(y);
+                        string inp = ($"{x} − {y} = {z}");
+                        input.Text = inp; input.Refresh();
+                        v = z.ToString();
+                        x = z.ToString();
+                        y = "";
+                        output.Text = x; output.Refresh();
+                    }
+                    else if (action == "×")
+                    {
+                        float z = float.Parse(x) * float.Parse(y);
+                        string inp = ($"{x} × {y} = {z}");
+                        input.Text = inp; input.Refresh();
+                        v = z.ToString();
+                        x = z.ToString();
+                        y = "";
+                        output.Text = x; output.Refresh();
+                    }
+                    else if (action == "÷")
+                    {
+                        float z = float.Parse(x) / float.Parse(y);
+                        string inp = ($"{x} ÷ {y} = {z}");
+                        input.Text = inp; input.Refresh();
+                        v = z.ToString();
+                        x = z.ToString();
+                        y = "";
+                        output.Text = x; output.Refresh();
+                    }
+                    else if (action == "√Ans")
+                    {
+                        float z = (float)Math.Sqrt(float.Parse(x));
+                        string inp = ($"√Ans = {z}");
+                        input.Text = inp; input.Refresh();
+                        v = z.ToString();
+                        x = z.ToString();
+                        y = "";
+                        output.Text = x; output.Refresh();
+                    }
+                    else if (action == "Ans^2")
+                    {
+                        float z = float.Parse(x) * float.Parse(x);
+                        string inp = ($"Ans^2 = {z}");
+                        input.Text = inp; input.Refresh();
+                        v = z.ToString();
+                        x = z.ToString();
+                        y = "";
+                        output.Text = x; output.Refresh();
+                    }
+                    output.Text = "×"; output.Refresh();
+                    action = "×";
                 }
-                else if (action == "−")
+                else
                 {
-                    float z = float.Parse(x) - float.Parse(y);
-                    string inp = ($"{x} − {y} = {z}");
-                    input.Text = inp; input.Refresh();
-                    v = z.ToString();
-                    x = z.ToString();
-                    y = "";
-                    output.Text = x; output.Refresh();
+                    op = true;
+                    output.Text = "×"; output.Refresh();
+                    action = "×";
                 }
-                else if (action == "×")
-                {
-                    float z = float.Parse(x) * float.Parse(y);
-                    string inp = ($"{x} × {y} = {z}");
-                    input.Text = inp; input.Refresh();
-                    v = z.ToString();
-                    x = z.ToString();
-                    y = "";
-                    output.Text = x; output.Refresh();
-                }
-                else if (action == "÷")
-                {
-                    float z = float.Parse(x) / float.Parse(y);
-                    string inp = ($"{x} ÷ {y} = {z}");
-                    input.Text = inp; input.Refresh();
-                    v = z.ToString();
-                    x = z.ToString();
-                    y = "";
-                    output.Text = x; output.Refresh();
-                }
-                else if (action == "√Ans")
-                {
-                    float z = (float)Math.Sqrt(float.Parse(x));
-                    string inp = ($"√Ans = {z}");
-                    input.Text = inp; input.Refresh();
-                    v = z.ToString();
-                    x = z.ToString();
-                    y = "";
-                    output.Text = x; output.Refresh();
-                }
-                else if (action == "Ans^2")
-                {
-                    float z = float.Parse(x) * float.Parse(x);
-                    string inp = ($"Ans^2 = {z}");
-                    input.Text = inp; input.Refresh();
-                    v = z.ToString();
-                    x = z.ToString();
-                    y = "";
-                    output.Text = x; output.Refresh();
-                }
-                output.Text = "×"; output.Refresh();
-                action = "×";
-            }
-            else
-            {
-                op = true;
-                output.Text = "×"; output.Refresh();
-                action = "×";
+                numentry = false;
+                dotentry = false;
             }
         }
 
         private void divide_Click(object sender, EventArgs e)
         {
-            if (op == true)
+            if (numentry == true)
             {
-                if (action == "+")
+                if (op == true)
                 {
-                    float z = float.Parse(x) + float.Parse(y);
-                    string inp = ($"{x} + {y} = {z}");
-                    input.Text = inp; input.Refresh();
-                    v = z.ToString();
-                    x = z.ToString();
-                    y = "";
-                    output.Text = x; output.Refresh();
+                    if (action == "+")
+                    {
+                        float z = float.Parse(x) + float.Parse(y);
+                        string inp = ($"{x} + {y} = {z}");
+                        input.Text = inp; input.Refresh();
+                        v = z.ToString();
+                        x = z.ToString();
+                        y = "";
+                        output.Text = x; output.Refresh();
+                    }
+                    else if (action == "−")
+                    {
+                        float z = float.Parse(x) - float.Parse(y);
+                        string inp = ($"{x} − {y} = {z}");
+                        input.Text = inp; input.Refresh();
+                        v = z.ToString();
+                        x = z.ToString();
+                        y = "";
+                        output.Text = x; output.Refresh();
+                    }
+                    else if (action == "×")
+                    {
+                        float z = float.Parse(x) * float.Parse(y);
+                        string inp = ($"{x} × {y} = {z}");
+                        input.Text = inp; input.Refresh();
+                        v = z.ToString();
+                        x = z.ToString();
+                        y = "";
+                        output.Text = x; output.Refresh();
+                    }
+                    else if (action == "÷")
+                    {
+                        float z = float.Parse(x) / float.Parse(y);
+                        string inp = ($"{x} ÷ {y} = {z}");
+                        input.Text = inp; input.Refresh();
+                        v = z.ToString();
+                        x = z.ToString();
+                        y = "";
+                        output.Text = x; output.Refresh();
+                    }
+                    else if (action == "√Ans")
+                    {
+                        float z = (float)Math.Sqrt(float.Parse(x));
+                        string inp = ($"√Ans = {z}");
+                        input.Text = inp; input.Refresh();
+                        v = z.ToString();
+                        x = z.ToString();
+                        y = "";
+                        output.Text = x; output.Refresh();
+                    }
+                    else if (action == "Ans^2")
+                    {
+                        float z = float.Parse(x) * float.Parse(x);
+                        string inp = ($"Ans^2 = {z}");
+                        input.Text = inp; input.Refresh();
+                        v = z.ToString();
+                        x = z.ToString();
+                        y = "";
+                        output.Text = x; output.Refresh();
+                    }
+                    output.Text = "÷"; output.Refresh();
+                    action = "÷";
                 }
-                else if (action == "−")
+                else
                 {
-                    float z = float.Parse(x) - float.Parse(y);
-                    string inp = ($"{x} − {y} = {z}");
-                    input.Text = inp; input.Refresh();
-                    v = z.ToString();
-                    x = z.ToString();
-                    y = "";
-                    output.Text = x; output.Refresh();
+                    op = true;
+                    output.Text = "÷"; output.Refresh();
+                    action = "÷";
                 }
-                else if (action == "×")
-                {
-                    float z = float.Parse(x) * float.Parse(y);
-                    string inp = ($"{x} × {y} = {z}");
-                    input.Text = inp; input.Refresh();
-                    v = z.ToString();
-                    x = z.ToString();
-                    y = "";
-                    output.Text = x; output.Refresh();
-                }
-                else if (action == "÷")
-                {
-                    float z = float.Parse(x) / float.Parse(y);
-                    string inp = ($"{x} ÷ {y} = {z}");
-                    input.Text = inp; input.Refresh();
-                    v = z.ToString();
-                    x = z.ToString();
-                    y = "";
-                    output.Text = x; output.Refresh();
-                }
-                else if (action == "√Ans")
-                {
-                    float z = (float)Math.Sqrt(float.Parse(x));
-                    string inp = ($"√Ans = {z}");
-                    input.Text = inp; input.Refresh();
-                    v = z.ToString();
-                    x = z.ToString();
-                    y = "";
-                    output.Text = x; output.Refresh();
-                }
-                else if (action == "Ans^2")
-                {
-                    float z = float.Parse(x) * float.Parse(x);
-                    string inp = ($"Ans^2 = {z}");
-                    input.Text = inp; input.Refresh();
-                    v = z.ToString();
-                    x = z.ToString();
-                    y = "";
-                    output.Text = x; output.Refresh();
-                }
-                output.Text = "÷"; output.Refresh();
-                action = "÷";
-            }
-            else
-            {
-                op = true;
-                output.Text = "÷"; output.Refresh();
-                action = "÷";
+                numentry = false;
+                dotentry = false;
             }
         }
 
         private void lessthan_Click(object sender, EventArgs e)
         {
-            if (op == true)
+            if (numentry == true)
             {
-                if (action == "+")
+                if (op == true)
                 {
-                    float z = float.Parse(x) + float.Parse(y);
-                    string inp = ($"{x} + {y} = {z}");
-                    input.Text = inp; input.Refresh();
-                    v = z.ToString();
-                    x = z.ToString();
-                    y = "";
-                    output.Text = x; output.Refresh();
+                    if (action == "+")
+                    {
+                        float z = float.Parse(x) + float.Parse(y);
+                        string inp = ($"{x} + {y} = {z}");
+                        input.Text = inp; input.Refresh();
+                        v = z.ToString();
+                        x = z.ToString();
+                        y = "";
+                        output.Text = x; output.Refresh();
+                    }
+                    else if (action == "−")
+                    {
+                        float z = float.Parse(x) - float.Parse(y);
+                        string inp = ($"{x} − {y} = {z}");
+                        input.Text = inp; input.Refresh();
+                        v = z.ToString();
+                        x = z.ToString();
+                        y = "";
+                        output.Text = x; output.Refresh();
+                    }
+                    else if (action == "×")
+                    {
+                        float z = float.Parse(x) * float.Parse(y);
+                        string inp = ($"{x} × {y} = {z}");
+                        input.Text = inp; input.Refresh();
+                        v = z.ToString();
+                        x = z.ToString();
+                        y = "";
+                        output.Text = x; output.Refresh();
+                    }
+                    else if (action == "÷")
+                    {
+                        float z = float.Parse(x) / float.Parse(y);
+                        string inp = ($"{x} ÷ {y} = {z}");
+                        input.Text = inp; input.Refresh();
+                        v = z.ToString();
+                        x = z.ToString();
+                        y = "";
+                        output.Text = x; output.Refresh();
+                    }
+                    else if (action == "√Ans")
+                    {
+                        float z = (float)Math.Sqrt(float.Parse(x));
+                        string inp = ($"√Ans = {z}");
+                        input.Text = inp; input.Refresh();
+                        v = z.ToString();
+                        x = z.ToString();
+                        y = "";
+                        output.Text = x; output.Refresh();
+                    }
+                    else if (action == "Ans^2")
+                    {
+                        float z = float.Parse(x) * float.Parse(x);
+                        string inp = ($"Ans^2 = {z}");
+                        input.Text = inp; input.Refresh();
+                        v = z.ToString();
+                        x = z.ToString();
+                        y = "";
+                        output.Text = x; output.Refresh();
+                    }
+                    output.Text = "√Ans"; output.Refresh();
+                    action = "√Ans";
                 }
-                else if (action == "−")
+                else
                 {
-                    float z = float.Parse(x) - float.Parse(y);
-                    string inp = ($"{x} − {y} = {z}");
-                    input.Text = inp; input.Refresh();
-                    v = z.ToString();
-                    x = z.ToString();
-                    y = "";
-                    output.Text = x; output.Refresh();
+                    op = true;
+                    output.Text = "√Ans"; output.Refresh();
+                    action = "√Ans";
                 }
-                else if (action == "×")
-                {
-                    float z = float.Parse(x) * float.Parse(y);
-                    string inp = ($"{x} × {y} = {z}");
-                    input.Text = inp; input.Refresh();
-                    v = z.ToString();
-                    x = z.ToString();
-                    y = "";
-                    output.Text = x; output.Refresh();
-                }
-                else if (action == "÷")
-                {
-                    float z = float.Parse(x) / float.Parse(y);
-                    string inp = ($"{x} ÷ {y} = {z}");
-                    input.Text = inp; input.Refresh();
-                    v = z.ToString();
-                    x = z.ToString();
-                    y = "";
-                    output.Text = x; output.Refresh();
-                }
-                else if (action == "√Ans")
-                {
-                    float z = (float)Math.Sqrt(float.Parse(x));
-                    string inp = ($"√Ans = {z}");
-                    input.Text = inp; input.Refresh();
-                    v = z.ToString();
-                    x = z.ToString();
-                    y = "";
-                    output.Text = x; output.Refresh();
-                }
-                else if (action == "Ans^2")
-                {
-                    float z = float.Parse(x) * float.Parse(x);
-                    string inp = ($"Ans^2 = {z}");
-                    input.Text = inp; input.Refresh();
-                    v = z.ToString();
-                    x = z.ToString();
-                    y = "";
-                    output.Text = x; output.Refresh();
-                }
-                output.Text = "√Ans"; output.Refresh();
-                action = "√Ans";
-            }
-            else
-            {
-                op = true;
-                output.Text = "√Ans"; output.Refresh();
-                action = "√Ans";
+                numentry = false;
+                dotentry = false;
             }
         }
 
         private void morethan_Click(object sender, EventArgs e)
         {
-            if (op == true)
+            if (numentry == true)
             {
-                if (action == "+")
+                if (op == true)
                 {
-                    float z = float.Parse(x) + float.Parse(y);
-                    string inp = ($"{x} + {y} = {z}");
-                    input.Text = inp; input.Refresh();
-                    v = z.ToString();
-                    x = z.ToString();
-                    y = "";
-                    output.Text = x; output.Refresh();
+                    if (action == "+")
+                    {
+                        float z = float.Parse(x) + float.Parse(y);
+                        string inp = ($"{x} + {y} = {z}");
+                        input.Text = inp; input.Refresh();
+                        v = z.ToString();
+                        x = z.ToString();
+                        y = "";
+                        output.Text = x; output.Refresh();
+                    }
+                    else if (action == "−")
+                    {
+                        float z = float.Parse(x) - float.Parse(y);
+                        string inp = ($"{x} − {y} = {z}");
+                        input.Text = inp; input.Refresh();
+                        v = z.ToString();
+                        x = z.ToString();
+                        y = "";
+                        output.Text = x; output.Refresh();
+                    }
+                    else if (action == "×")
+                    {
+                        float z = float.Parse(x) * float.Parse(y);
+                        string inp = ($"{x} × {y} = {z}");
+                        input.Text = inp; input.Refresh();
+                        v = z.ToString();
+                        x = z.ToString();
+                        y = "";
+                        output.Text = x; output.Refresh();
+                    }
+                    else if (action == "÷")
+                    {
+                        float z = float.Parse(x) / float.Parse(y);
+                        string inp = ($"{x} ÷ {y} = {z}");
+                        input.Text = inp; input.Refresh();
+                        v = z.ToString();
+                        x = z.ToString();
+                        y = "";
+                        output.Text = x; output.Refresh();
+                    }
+                    else if (action == "√Ans")
+                    {
+                        float z = (float)Math.Sqrt(float.Parse(x));
+                        string inp = ($"√Ans = {z}");
+                        input.Text = inp; input.Refresh();
+                        v = z.ToString();
+                        x = z.ToString();
+                        y = "";
+                        output.Text = x; output.Refresh();
+                    }
+                    else if (action == "Ans^2")
+                    {
+                        float z = float.Parse(x) * float.Parse(x);
+                        string inp = ($"Ans^2 = {z}");
+                        input.Text = inp; input.Refresh();
+                        v = z.ToString();
+                        x = z.ToString();
+                        y = "";
+                        output.Text = x; output.Refresh();
+                    }
+                    output.Text = "Ans^2"; output.Refresh();
+                    action = "Ans^2";
                 }
-                else if (action == "−")
+                else
                 {
-                    float z = float.Parse(x) - float.Parse(y);
-                    string inp = ($"{x} − {y} = {z}");
-                    input.Text = inp; input.Refresh();
-                    v = z.ToString();
-                    x = z.ToString();
-                    y = "";
-                    output.Text = x; output.Refresh();
+                    op = true;
+                    output.Text = "Ans^2"; output.Refresh();
+                    action = "Ans^2";
                 }
-                else if (action == "×")
-                {
-                    float z = float.Parse(x) * float.Parse(y);
-                    string inp = ($"{x} × {y} = {z}");
-                    input.Text = inp; input.Refresh();
-                    v = z.ToString();
-                    x = z.ToString();
-                    y = "";
-                    output.Text = x; output.Refresh();
-                }
-                else if (action == "÷")
-                {
-                    float z = float.Parse(x) / float.Parse(y);
-                    string inp = ($"{x} ÷ {y} = {z}");
-                    input.Text = inp; input.Refresh();
-                    v = z.ToString();
-                    x = z.ToString();
-                    y = "";
-                    output.Text = x; output.Refresh();
-                }
-                else if (action == "√Ans")
-                {
-                    float z = (float)Math.Sqrt(float.Parse(x));
-                    string inp = ($"√Ans = {z}");
-                    input.Text = inp; input.Refresh();
-                    v = z.ToString();
-                    x = z.ToString();
-                    y = "";
-                    output.Text = x; output.Refresh();
-                }
-                else if (action == "Ans^2")
-                {
-                    float z = float.Parse(x) * float.Parse(x);
-                    string inp = ($"Ans^2 = {z}");
-                    input.Text = inp; input.Refresh();
-                    v = z.ToString();
-                    x = z.ToString();
-                    y = "";
-                    output.Text = x; output.Refresh();
-                }
-                output.Text = "Ans^2"; output.Refresh();
-                action = "Ans^2";
-            }
-            else
-            {
-                op = true;
-                output.Text = "Ans^2"; output.Refresh();
-                action = "Ans^2";
+                numentry = false;
+                dotentry = false;
             }
         }
 
@@ -811,14 +859,16 @@ namespace calc
 
         private void clearall_Click(object sender, EventArgs e)
         {
-            string x = "";
-            string y = "";
-            string v = "";
-            string action = "";
-            bool op = false;
-            bool calculated = false;
+            x = "";
+            y = "";
+            v = "";
+            action = "";
+            op = false;
+            calculated = false;
             output.Text = ""; output.Refresh();
             input.Text = ""; input.Refresh();
+            numentry = false;
+            dotentry = false;
         }
     }
 }
