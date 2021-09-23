@@ -706,7 +706,7 @@ namespace calc
                     output.Text = "√Ans"; output.Refresh();
                     action = "√Ans";
                 }
-                numentry = false;
+                numentry = true;
                 dotentry = false;
             }
         }
@@ -786,7 +786,7 @@ namespace calc
                     output.Text = "Ans^2"; output.Refresh();
                     action = "Ans^2";
                 }
-                numentry = false;
+                numentry = true;
                 dotentry = false;
             }
         }
